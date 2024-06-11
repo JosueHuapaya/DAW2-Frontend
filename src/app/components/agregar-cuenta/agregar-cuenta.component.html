@@ -1,5 +1,90 @@
 
 <app-menu></app-menu>
-<p class="text-white m-2 text-center">
-  Bruno Aguayo Ejemplo Frontend
-</p>
+<div class="container bg-white shadow p-3">
+
+  <div>
+    <form [formGroup]="formRegistrar">
+      <div class="row mb-3">
+              <mat-toolbar color="primary" >
+              <span>Registra Cuenta</span>
+              </mat-toolbar>
+      </div>
+
+      <div class="row mb-3">
+          <mat-form-field class="col-md-4 mx-auto">
+              <mat-label>Número de cuenta</mat-label>
+              <input  matInput [(ngModel)] ="cuenta.numero" formControlName="validaNumero">
+
+              <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaNumero.touched">
+                  <span *ngIf="formRegistrar.controls.validaNumero.hasError('required')">
+                      El número es requerida
+                  </span>
+                  <span *ngIf="formRegistrar.controls.validaNumero.hasError('pattern')">
+                      El número debe ser de 20 caracteres
+                  </span>
+                  <span *ngIf="formRegistrar.controls.validaNumero.hasError('existeNumero')">
+                      El número ya existe
+                  </span>
+              </mat-hint>
+          </mat-form-field>
+      </div>
+
+      <div class="row mb-3">
+        <mat-form-field class="col-md-4 mx-auto">
+            <mat-label>Tipo de Entidad</mat-label>
+            <mat-select [(ngModel)]="idTipoEntidad" (selectionChange)="listarEntidadFinanciera()"  formControlName="validaTipoEntidad">
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option *ngFor="let x of lstTipoEntidadBancaria" [value]="x.idDataCatalogo">
+                  {{x.descripcion}}
+              </mat-option>
+          </mat-select>
+          <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaTipoEntidad.touched">
+              <span *ngIf="formRegistrar.controls.validaTipoEntidad.hasError('min')">
+                  El dato es requerido
+              </span>
+          </mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div class="row mb-3">
+        <mat-form-field class="col-md-4 mx-auto">
+          <mat-label>Entidad Financiera</mat-label>
+          <mat-select [(ngModel)]="cuenta.entidadFinanciera!.idEntidadFinanciera" formControlName="validaEntidad">
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option *ngFor="let x of lstEntidadFinanciera" [value]="x.idEntidadFinanciera">
+                  {{x.nombre}}
+              </mat-option>
+          </mat-select>
+          <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaEntidad.touched">
+              <span *ngIf="formRegistrar.controls.validaEntidad.hasError('min')">
+                  El dato es requerido
+              </span>
+          </mat-hint>
+      </mat-form-field>
+      </div>
+
+
+      <div class="row mb-3">
+        <mat-form-field class="col-md-4 mx-auto">
+          <mat-label>Tipo Moneda</mat-label>
+          <mat-select [(ngModel)]="cuenta.tipoMoneda!.idDataCatalogo" formControlName="validaMoneda">
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option *ngFor="let x of lstTipoMoneda" [value]="x.idDataCatalogo">
+                  {{x.descripcion}}
+              </mat-option>
+          </mat-select>
+          <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaMoneda.touched">
+              <span *ngIf="formRegistrar.controls.validaMoneda.hasError('min')">
+                  El dato es requerido
+              </span>
+          </mat-hint>
+      </mat-form-field>
+      </div>
+
+      <div  class="row"  style="margin-top: 3%; margin-left: auto; margin-right: auto; max-width: fit-content;" >
+          <button mat-raised-button type="submit" color="primary" [disabled]="formRegistrar.invalid" (click)="registra()" >Registra</button>
+      </div>
+</form>
+  </div>
+
+</div>
