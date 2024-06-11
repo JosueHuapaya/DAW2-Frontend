@@ -1,2 +1,109 @@
 <app-menu></app-menu>
-<p>Registra Prestatario - Julio Avalos</p>
+<div class="container">
+
+    <form [formGroup]="formRegistrar">
+                    <div class="row">
+                            <mat-toolbar color="primary" >    
+                            <span style="margin-left: 42%;">Registra Prestatario</span>    
+                            </mat-toolbar>  
+                    </div>
+                   <div class="row"  style="margin-top: 3%">
+                        <mat-form-field class="col-md-4">
+                            <mat-label>Nombre</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.nombres" formControlName="validaNombre">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaNombre.touched">
+                                    <span *ngIf="formRegistrar.controls.validaNombre.hasError('required')">
+                                        El Nombre es requerido
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaNombre.hasError('pattern')">
+                                        El Nombre Min 1 y solo Letras
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-4">
+                            <mat-label>Apellidos</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.apellidos" formControlName="validaApellidos">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaApellidos.touched">
+                                    <span *ngIf="formRegistrar.controls.validaApellidos.hasError('required')">
+                                        El Apellido es requerido
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaApellidos.hasError('pattern')">
+                                        El Apellido Min 1 y solo Letras
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+                    
+                        <mat-form-field class="col-md-4">
+                            <mat-label>DNI</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.dni" formControlName="validaDni">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaDni.touched">
+                                    <span *ngIf="formRegistrar.controls.validaDni.hasError('required')">
+                                        El Dni es requerido
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaDni.hasError('pattern')">
+                                        El DNI debe ser 8 Caracteres y solo Numeros
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaDni.hasError('existeDni')">
+                                        El DNI ya existe
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+                </div>
+
+                <div class="row"  style="margin-top: 3%">
+                        <mat-form-field class="col-md-4">
+                            <mat-label>Login</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.login" formControlName="validaLogin">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaLogin.touched">
+                                    <span *ngIf="formRegistrar.controls.validaLogin.hasError('required')">
+                                        El Login es requerido
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaLogin.hasError('pattern')">
+                                        El login es de 1 a 30 caracteres y solo Letras
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaLogin.hasError('existeLogin')">
+                                        El Login ya existe
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+                   
+                        <mat-form-field class="col-md-4">
+                            <mat-label>Correo</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.correo" formControlName="validaCorreo">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaCorreo.touched">
+                                    <span *ngIf="formRegistrar.controls.validaCorreo.hasError('required')">
+                                        El Correo es requerido
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaCorreo.hasError('pattern')">
+                                        El Correo no tiene un formato adecuado
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+                    
+                        <mat-form-field class="col-md-4">
+                            <mat-label>FechaNacimiento</mat-label>
+                                <input type="date" matInput [(ngModel)]="prestatario.fechaNacimiento" formControlName="validaFechaNacimiento">
+                        </mat-form-field>
+                </div>
+
+
+                    <div  class="row"  style="margin-top: 3%; margin-left: 33%; width: 1140px;">
+                        <mat-form-field class="col-md-4">
+                            <mat-label>Dirección</mat-label>
+                                <input  matInput [(ngModel)]="prestatario.direccion" formControlName="validaDireccion">
+                                <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaDireccion.touched">
+                                    <span *ngIf="formRegistrar.controls.validaDireccion.hasError('required')">
+                                        La Direccion es requerida
+                                    </span>
+                                    <span *ngIf="formRegistrar.controls.validaDireccion.hasError('pattern')">
+                                        La Direccion Min: 3 
+                                    </span>
+                                </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div  class="row"  style="margin-top: 3%; margin-left: auto; margin-right: auto; max-width: fit-content;" >
+                        <button mat-raised-button type="submit" color="primary" [disabled]="formRegistrar.invalid" (click)="registra()">Registra</button>
+                    </div>
+                </form>           
+    </div>
