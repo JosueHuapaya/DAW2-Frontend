@@ -5,7 +5,7 @@ export class Usuario {
     nombres?:string;
     apellidos?: string;
     nombreCompleto?: string;
-    usuarioSuperior?:Usuario;
-    usuarioRegistro?: Usuario;
-    usuarioActualiza?:Usuario;
+    usuarioSuperior?:number;
+    usuarioRegistro?: number;
+    usuarioActualiza?:number;
 }
