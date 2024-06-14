@@ -48,9 +48,9 @@ export class AgregarEjemploComponent {
       },
       usuarioActualiza: {
           idUsuario: -1
-      },  
+      },
   }
-  
+
     formRegistrar = this.formBuilder.group({
       validaDescripcion: ['', [Validators.required, Validators.pattern('[a-zA-Z ]{3,30}')], this.validaDescripcion.bind(this)],
       validaLongitud: ['', [Validators.required,Validators.min(1)]],
@@ -63,11 +63,11 @@ export class AgregarEjemploComponent {
   });
 
 
-  //listas de ubigeo 
+  //listas de ubigeo
   departamentos : string[] = [];
   provincias : string[] = [];
   distritos: Ubigeo[] = [];
-  
+
   //lista de paises
   lstPais: Pais[] = [];
 
@@ -76,7 +76,7 @@ export class AgregarEjemploComponent {
 
   //lista de usuarios prestarios
   lstPrestatarios: Usuario[] = [];
-  
+
   //usuario en sesion
   objUsuario: Usuario = {};
 
@@ -105,7 +105,7 @@ export class AgregarEjemploComponent {
         console.log(">>> OnInit >>> " + this.departamentos);
         console.log(">>> OnInit >>> " + this.lstDias);
         console.log(">>> OnInit >>> " + this.lstPrestatarios);
-        console.log(">>> OnInit [fin]");      
+        console.log(">>> OnInit [fin]");
     }
 
   registra() {
@@ -142,7 +142,7 @@ export class AgregarEjemploComponent {
                         },
                         usuarioActualiza: {
                             idUsuario: -1
-                        },  
+                        },
                     }
             }
         );
@@ -150,15 +150,15 @@ export class AgregarEjemploComponent {
 
   validaDescripcion(control: FormControl) {
     console.log(">>> validaDescripcion [inicio] " + control.value);
-    
+
      return this.ejemploService.validaDescripcionRegistra(control.value).pipe(
-       map((resp: any) => { 
+       map((resp: any) => {
             console.log(">>> validaDescripcion [resp] " + resp.valid);
-            return (resp.valid) ? null : {existeDescripcion: true} ;    
+            return (resp.valid) ? null : {existeDescripcion: true} ;
           })
       );
   }
-  
+
    listaProvincia(){
     console.log("listaProvincia>>> " + this.ejemplo.ubigeo?.departamento);
     this.utilService.listaProvincias(this.ejemplo.ubigeo?.departamento).subscribe(
