@@ -42,7 +42,7 @@
                                         El Dni es requerido
                                     </span>
                                     <span *ngIf="formRegistrar.controls.validaDni.hasError('pattern')">
-                                        El DNI debe ser 8 Caracteres y solo Numeros
+                                        El DNI debe ser 8 Caracteres y solo Números
                                     </span>
                                     <span *ngIf="formRegistrar.controls.validaDni.hasError('existeDni')">
                                         El DNI ya existe
@@ -94,10 +94,10 @@
                                 <input  matInput [(ngModel)]="prestatario.direccion" formControlName="validaDireccion">
                                 <mat-hint style="color: red;" *ngIf="formRegistrar.controls.validaDireccion.touched">
                                     <span *ngIf="formRegistrar.controls.validaDireccion.hasError('required')">
-                                        La Direccion es requerida
+                                        La Dirección es requerida
                                     </span>
                                     <span *ngIf="formRegistrar.controls.validaDireccion.hasError('pattern')">
-                                        La Direccion Min: 3 
+                                        La Dirección Min: 3 
                                     </span>
                                 </mat-hint>
                         </mat-form-field>
