@@ -3,9 +3,9 @@
 
 <form [formGroup]="formRegistrar">
                 <div class="row">
-                        <mat-toolbar color="primary" >    
-                        <span>Registra Ejemplo</span>    
-                        </mat-toolbar>  
+                        <mat-toolbar color="primary" >
+                        <span>Registra Ejemplo</span>
+                        </mat-toolbar>
                 </div>
                 <div  class="row"  style="margin-top: 3%">
                             <mat-form-field class="col-md-4">
@@ -35,7 +35,7 @@
                                         La longitud es requerido
                                     </span>
                                 </mat-hint>
-                            </mat-form-field> 
+                            </mat-form-field>
 
 
                             <mat-form-field class="col-md-4">
@@ -54,7 +54,7 @@
                             </mat-form-field>
                 </div>
                 <div class="row" style="margin-top: 3%">
-                    
+
                     <mat-form-field class="col-md-4">
                         <mat-label>Departamento</mat-label>
                         <mat-select  [(ngModel)]="ejemplo.ubigeo!.departamento" (selectionChange)="listaProvincia()" formControlName="validaDepartamento">
@@ -138,5 +138,5 @@
                 </div>
 </form>
   </div>
-  
+
 

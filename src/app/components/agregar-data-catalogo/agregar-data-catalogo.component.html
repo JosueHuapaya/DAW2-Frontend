@@ -1,2 +1,52 @@
 <app-menu></app-menu>
-<p>agregar-data-catalogo -> Tenorio!</p>
+<div class="container">
+  <form [formGroup]="formRegistrar" (ngSubmit)="registrarDataCatalogo()">
+    <div class="row">
+      <mat-toolbar color="primary">
+        <span>Registro Data Catálogo</span>
+      </mat-toolbar>
+    </div>
+    <div class="row" style="margin-top: 3%">
+      <!-- Campo Descripcion -->
+      <mat-form-field class="col-md-4">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="validaDescripcion">
+        <mat-hint style="color: red;" *ngIf="formRegistrar.get('validaDescripcion')?.touched">
+          <span *ngIf="formRegistrar.get('validaDescripcion')?.hasError('required')">
+            El nombre es requerido.
+          </span>
+          <span *ngIf="formRegistrar.get('validaDescripcion')?.hasError('pattern')">
+            El nombre es de 3 a 30 caracteres.
+          </span>
+          <span *ngIf="formRegistrar.get('validaDescripcion')?.hasError('existeDescripcion')">
+            La descripción ya existe
+          </span>
+        </mat-hint>
+      </mat-form-field>
+
+      <!-- Selección de Tipo -->
+      <mat-form-field class="col-md-4">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="idCatalogo">
+          <mat-option *ngFor="let tipo of catalogoList" [value]="tipo.idCatalogo">
+            {{ tipo.descripcion }}
+          </mat-option>
+        </mat-select>
+        <mat-hint style="color: red;" *ngIf="formRegistrar.get('idCatalogo')?.touched">
+          <span *ngIf="formRegistrar.get('idCatalogo')?.hasError('required')">
+            El tipo es requerido.
+          </span>
+        </mat-hint>
+      </mat-form-field>
+
+      <!-- Checkbox para Estado -->
+      <div class="col-md-4" style="display: flex; align-items: center; justify-content: center">
+        <mat-checkbox formControlName="estado">Estado</mat-checkbox>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 3%; margin-left: auto; margin-right: auto; max-width: fit-content;">
+      <button mat-raised-button type="submit" color="primary" [disabled]="formRegistrar.invalid">Registrar</button>
+    </div>
+  </form>
+</div>
