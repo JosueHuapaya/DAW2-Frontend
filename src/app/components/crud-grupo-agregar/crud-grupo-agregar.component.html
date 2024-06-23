@@ -1,1 +1,92 @@
-<p>crud-grupo-agregar works!</p>
+<div class="container">
+    <form  id="idFormModalidad" [formGroup]="formsRegistra" > 
+                <div class="row">
+                        <mat-toolbar color="primary" >    
+                        <span>Registra Grupo</span>    
+                        </mat-toolbar>  
+                </div>
+                <div  class="row"  style="margin-top: 3%">
+                            
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Nombre</mat-label>
+                                <input  matInput [(ngModel)] ="objGrupo.descripcion" formControlName="validaNombre" >
+                                <mat-hint style="color: red"  *ngIf="formsRegistra.controls.validaNombre.touched">
+                                    <span *ngIf="formsRegistra.controls.validaNombre.hasError('required')">
+                                        El nombre es requerido                        
+                                    </span>
+                                    <span *ngIf="formsRegistra.controls.validaNombre.hasError('pattern')">
+                                        El nombre es de 3 a 30 caracteres                        
+                                    </span>
+                              </mat-hint>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Departamento</mat-label>
+                                <mat-select  [(ngModel)]="objGrupo.ubigeo!.departamento" (selectionChange)="listaProvincia()" formControlName="validaDepartamento">
+                                    <mat-option value="-1"> [Seleccione] </mat-option>
+                                    <mat-option *ngFor="let x of departamentos" [value]="x">
+                                        {{x}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-hint style="color: red;" *ngIf="formsRegistra.controls.validaDepartamento.touched">
+                                    <span *ngIf="formsRegistra.controls.validaDepartamento.hasError('min')">
+                                        El departamento es requerido
+                                    </span>
+                                </mat-hint>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Provincia</mat-label>
+                                <mat-select [(ngModel)] ="objGrupo.ubigeo!.provincia" (selectionChange)="listaDistrito()" formControlName="validaProvincia">
+                                    <mat-option value="-1"> [Seleccione] </mat-option>
+                                    <mat-option *ngFor="let p of provincias" [value]="p">
+                                                {{p}}
+                                    </mat-option> 
+                                 </mat-select> 
+                                 <mat-hint style="color: red"  *ngIf="formsRegistra.controls.validaProvincia.touched">
+                                    <span *ngIf="formsRegistra.controls.validaProvincia.hasError('min')">
+                                        La Provincia es requerido                        
+                                    </span>
+                                </mat-hint>
+                            </mat-form-field> 
+                </div>
+                <div class="row"  style="margin-top: 3%">
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Distrito</mat-label>
+                        <mat-select [(ngModel)] ="objGrupo.ubigeo!.idUbigeo"formControlName="validaDistrito">
+                            <mat-option value="-1"> [Seleccione] </mat-option>
+                            <mat-option *ngFor="let dis of distritos" [value]="dis.idUbigeo">
+                                        {{dis.distrito}}
+                            </mat-option> 
+                         </mat-select> 
+                         <mat-hint style="color: red"  *ngIf="formsRegistra.controls.validaDistrito.touched">
+                            <span *ngIf="formsRegistra.controls.validaDistrito.hasError('min')">
+                                El Distrito es requerido                        
+                            </span>
+                        </mat-hint>
+                    </mat-form-field> 
+
+                            <mat-form-field class="col-md-4">
+                                <mat-label>Lider</mat-label>
+                                <mat-select [(ngModel)] ="objGrupo.usuarioLider!.idUsuario"formControlName="validaLider">
+                                    <mat-option value="-1"> [Seleccione] </mat-option>
+                                    <mat-option *ngFor="let l of lstUsuarioLider" [value]="l.idUsuario">
+                                                {{l.nombreCompleto}}
+                                    </mat-option> 
+                                 </mat-select> 
+                                 <mat-hint style="color: red"  *ngIf="formsRegistra.controls.validaLider">
+                                    <span *ngIf="formsRegistra.controls.validaLider.hasError('min')">
+                                        El Lider es requerido                        
+                                    </span>
+                                </mat-hint>
+                            </mat-form-field> 
+                </div>
+                <div  class="row" >
+                    <button mat-raised-button type="submit" [disabled]="formsRegistra.invalid" (click)="registra()" color="primary" >Registra</button>
+                </div>
+   </form>
+  </div>
+  
+
+
+
+

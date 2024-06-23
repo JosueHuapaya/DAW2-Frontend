@@ -13,4 +13,5 @@ export class Grupo {
     usuarioSuperior?:Usuario;
     usuarioRegistro?: Usuario;
     usuarioActualiza?: Usuario
+    estado?: number;
 }
