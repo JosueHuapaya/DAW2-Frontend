@@ -1,0 +1,56 @@
+.mat-column-idCoordenada,
+.mat-column-prestatario,
+.mat-column-latitud,
+.mat-column-longitud,
+.mat-column-ubigeo,
+.mat-column-fechaRegistro,
+.mat-column-fechaActualizacion,
+.mat-column-estado,
+.mat-column-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-column-idCoordenada {
+  flex: 0 0 10%;
+}
+
+.mat-column-prestatario {
+  flex: 0 0 18%;
+}
+
+.mat-column-latitud {
+  flex: 0 0 8%;
+}
+
+.mat-column-longitud {
+  flex: 0 0 8%;
+}
+
+.mat-column-ubigeo {
+  flex: 0 0 15%;
+}
+
+.mat-column-fechaRegistro {
+  flex: 0 0 15%;
+}
+
+.mat-column-fechaActualizacion {
+  flex: 0 0 15%;
+}
+
+.mat-column-estado {
+  flex: 0 0 7%;
+}
+
+.mat-column-acciones {
+  flex: 0 0 14%;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 0 8px;
+  box-sizing: border-box;
+}

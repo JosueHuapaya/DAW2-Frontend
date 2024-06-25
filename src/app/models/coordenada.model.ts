@@ -9,6 +9,7 @@ export class Coordenada {
   prestatario?: Usuario;
   ubigeo?: Ubigeo;
   fechaRegistro?: Date;
+  estado?: number;
   fechaActualizacion?: Date;
   usuarioRegistro?: Usuario;
   usuarioActualiza?: Usuario
