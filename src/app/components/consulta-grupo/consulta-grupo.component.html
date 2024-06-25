@@ -1,1 +1,63 @@
-<p>consulta-grupo works!</p>
+<app-menu></app-menu>
+<div class="container">
+    <div class="row">
+        <mat-toolbar color="primary">
+            <span>Consulta Grupo</span>
+        </mat-toolbar>
+    </div>
+
+    <div class="row" style="margin-top: 3%">
+        <mat-form-field class="col-md-5">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(ngModel)]="descripcion" >
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-label>Usuario Lider</mat-label>
+            <mat-select [(ngModel)]="usuarioLider">
+                <mat-option value="-1"> [Todos] </mat-option>
+                <mat-option *ngFor="let aux of lstUsuarioLider" [value]="aux.idUsuario">
+                    {{aux.nombreCompleto}}  
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="col-md-2" style="display: flex; align-items: center; justify-content: center">
+            <div class="custom-control custom-switch">
+                <input [(ngModel)]="estado" type="checkbox" class="custom-control-input" id="idEstado" name="estado"  [checked]="true"/>
+                <label class="custom-control-label" for="idEstado">Estado</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 3%; display: flex; align-items: center; justify-content: center">
+        <button (click)="consultar()" mat-raised-button type="button" color="primary" style="width: 100px;" >Filtrar</button>
+    </div>
+
+    <div class="row" style="margin-top: 3%">
+    
+        <mat-table #table class="mat-cell" [dataSource]="dataSource">
+            <ng-container matColumnDef="idGrupo">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Código</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.idGrupo }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.descripcion}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="usuario">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Usuario Lider</mat-header-cell>
+                <mat-cell *matCellDef="let aux of lstUsuarioLider">{{ aux.usuarioLider.nombreCompleto}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+            </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+</div>    
+

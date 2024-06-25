@@ -6,6 +6,7 @@ import { AppSettings } from '../app.settings';
 
 const baseUrlPrueba = AppSettings.API_ENDPOINT+ '/grupo';
 const baseUrlCrudGrupo = AppSettings.API_ENDPOINT + '/crudGrupo';
+const baseUrlConsultaGrupo = AppSettings.API_ENDPOINT + '/consultaGrupo';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class GrupoService {
 
   constructor(private http:HttpClient) { }
 
+  //PC1
   registrar(data:Grupo):Observable<any>{
     return this.http.post(baseUrlPrueba, data);
   }
@@ -26,6 +28,7 @@ export class GrupoService {
     return this.http.get<any>(baseUrlCrudGrupo+'/validaDescripcionActualiza?descripcion='+descripcion + "&idEjemplo="+id);
   }
 
+  //PC2
   registrarCrud(data:Grupo):Observable<any>{
     return this.http.post(baseUrlCrudGrupo+"/registraGrupo", data);
   }
@@ -40,4 +43,11 @@ export class GrupoService {
     return this.http.get(baseUrlCrudGrupo+"/listaGrupoPorNombreLike/"+ filtro);
   }
   
+
+  //EF: Consulta de Grupo
+  consultaGrupo(descripcion: string, idUsuarioLider: string, estado: number): Observable<any>{
+    console.log('>>> Service >> consultaGrupo [inicio]' + descripcion);
+    return this.http.get<any>(baseUrlConsultaGrupo+'/consultaComplejoGrupo?descripcion='+descripcion + "&idUsuarioLider="+idUsuarioLider + "&estado="+estado);
+  }
+
 }
