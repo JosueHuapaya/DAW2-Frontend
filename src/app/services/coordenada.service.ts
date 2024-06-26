@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 const baseUrl = AppSettings.API_ENDPOINT + '/coordenadas';
 const baseUrlCoordenadaCrud = AppSettings.API_ENDPOINT + '/coordenadaCRUD';
+const baseUrlCoordenadaConsulta = AppSettings.API_ENDPOINT + '/consultaCoordenada';
 
 
 @Injectable({
@@ -33,6 +34,12 @@ export class CoordenadaService {
 
   consultarCoordenada(filtro: any): Observable<any> {
     return this.http.get(baseUrlCoordenadaCrud + "/obtenerCoordenadas/" + filtro);
+  }
+
+  consultarCoordenadaCompleta(latitud: number, longitud: number, departamento: string): Observable<any> {
+
+    return this.http.get(baseUrlCoordenadaConsulta + '/consultaComplejaCoordenada/' + latitud + '/' + longitud + '/' + departamento);
+
   }
 
 }

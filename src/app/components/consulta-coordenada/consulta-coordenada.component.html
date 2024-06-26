@@ -1,1 +1,86 @@
-<p>consulta-coordenada works!</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="row">
+    <mat-toolbar color="primary">
+      <span>Consulta Compleja Coordenadas</span>
+    </mat-toolbar>
+  </div>
+  <div class="row" style="margin-top: 3%">
+    <div class="col-md-5">
+      <mat-form-field>
+        <mat-label>Latitud</mat-label>
+        <input matInput [(ngModel)]="latitud">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field>
+        <mat-label>Departamento</mat-label>
+        <mat-select [(ngModel)]="seleccionaDepartamento" (selectionChange)="seleccionarDepartamento($event)">
+          <mat-option value="-1">[Todos]</mat-option>
+          <mat-option *ngFor="let departamento of departamentos" [value]="departamento">
+            {{departamento}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 3%">
+    <div class="col-md-6">
+      <mat-form-field>
+        <mat-label>Longitud</mat-label>
+        <input matInput [(ngModel)]="longitud">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 3%; display: flex; align-items: center; justify-content: center">
+    <button (click)="consultarCoordenadaComplet()" mat-raised-button type="button" color="primary"
+      style="width: 100px;">Filtrar</button>
+  </div>
+  <div class="row" style="margin-top: 3%">
+    <div class="col-md-12">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="idCoordenada">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>idCoordenada</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.idCoordenada }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="prestatario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Prestatario</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.prestatario.nombres}} {{ aux.prestatario.apellidos}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="latitud">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Latitud</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.latitud }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="longitud">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Longitud</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.longitud }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ubigeo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Ubigeo</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.ubigeo.departamento }} - {{ aux.ubigeo.provincia }} - {{
+            aux.ubigeo.distrito }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fechaRegistro">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Registro</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.fechaRegistro | date:'short' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fechaActualizacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Actualización</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.fechaActualizacion | date:'short' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+          <mat-cell *matCellDef="let aux">{{ aux.estado == 1 ? "Activo" : "Inactivo" }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let aux">
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[6, 8, 10]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
