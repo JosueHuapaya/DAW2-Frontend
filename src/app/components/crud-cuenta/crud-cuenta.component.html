@@ -1,1 +1,79 @@
-<p>crud-cuenta works!</p>
+<app-menu></app-menu>
+<div class="container bg-white shadow">
+  <div class="row">
+    <mat-toolbar color="primary">
+      <span >Crud Cuenta</span>
+    </mat-toolbar>
+  </div>
+  <div class="row mt-4 mb-2">
+    <mat-form-field class="col-5 mx-auto">
+      <mat-label>Numero de Cuenta</mat-label>
+      <input matInput [(ngModel)]="filter">
+    </mat-form-field>
+  </div>
+  <div class="row mb-3">
+    <div class="mx-auto">
+      <button class="mx-4 p-3" (click)="refresh()" mat-raised-button type="button" color="primary" >Filtrar</button>
+      <button class="mx-4 p-3" (click)="openDialogRegister()" mat-raised-button type="button" color="primary">Registrar</button>
+    </div>
+  </div>
+
+  <div class="row mt-3" >
+    <mat-table #table class="table" [dataSource]="data">
+      <ng-container matColumnDef="idCuenta">
+        <mat-header-cell *matHeaderCellDef><strong>Codigo</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.idCuenta}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="numero">
+        <mat-header-cell *matHeaderCellDef><strong>Numero</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.numero}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="entidad">
+        <mat-header-cell *matHeaderCellDef><strong>Entidad</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.entidadFinanciera.nombre}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="moneda">
+        <mat-header-cell *matHeaderCellDef><strong>Moneda</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.tipoMoneda.descripcion}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef><strong>Estado</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.estado == 1 ? 'Activo' : 'Inactivo'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell mat-header-cell *matHeaderCellDef><span class="mx-4"><strong>Acciones</strong></span></mat-header-cell>
+        <mat-cell *matCellDef="let res; let i = index;">
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="idEstado_{{ res.idCuenta}}" name="estado"
+            [checked]="res.estado == 1 ? true : false "
+            *ngIf="res.estado == 1 ? 'Activo' : 'Inactivo'"
+            (change)="updateEstado(res)" />
+            <label class="custom-control-label" for="idEstado_{{ res.idCuenta}}">
+
+            </label>
+          </div>
+
+          <button mat-icon-button color="primary" (click)="openDialogUpdate(res)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="delete(res)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[7,8,9]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+</div>

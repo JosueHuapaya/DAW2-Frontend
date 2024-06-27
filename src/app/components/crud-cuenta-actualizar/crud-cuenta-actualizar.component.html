@@ -1,1 +1,95 @@
-<p>crud-cuenta-actualizar works!</p>
+<div class="container">
+  <div>
+    <form [formGroup]="formRegister">
+      <div class="mat-dialog-content p-4" style="width: 400px">
+        <div class="row mb-3">
+          <mat-toolbar color="primary">
+            <span>CRUD Actualizar Cuenta</span>
+          </mat-toolbar>
+        </div>
+
+        <div class="row mb-2">
+          <mat-form-field class="col-md-10 mx-auto">
+            <mat-label>Número de cuenta</mat-label>
+            <input matInput [(ngModel)]="cuenta.numero" formControlName="validateNumber"/>
+
+            <mat-hint style="color: red" *ngIf="formRegister.controls.validateNumber.touched">
+              <span *ngIf="formRegister.controls.validateNumber.hasError('required')">
+                El número es requerida
+              </span>
+              <span *ngIf="formRegister.controls.validateNumber.hasError('pattern')">
+                El número debe ser de 20 caracteres
+              </span>
+              <span *ngIf="formRegister.controls.validateNumber.hasError('exisnumero')">
+                El número ya existe
+              </span>
+              <span *ngIf="formRegister.controls.validateNumber.hasError('exnumero')">
+                Numero duplicado
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="row mb-2">
+          <mat-form-field class="col-md-10 mx-auto">
+            <mat-label>Tipo Entidad Financiera</mat-label>
+            <mat-select [(ngModel)]="cuenta.entidadFinanciera!.tipoEntidad!.idDataCatalogo" (selectionChange)="listarEntidadFinanciera()"  formControlName="validaTipoEntidad">
+                <mat-option value="-1"> [Seleccione] </mat-option>
+                <mat-option *ngFor="let x of tipoEntidadBancaria" [value]="x.idDataCatalogo">
+                    {{x.descripcion}}
+                </mat-option>
+            </mat-select>
+            <mat-hint style="color: red;" *ngIf="formRegister.controls.validaTipoEntidad.touched">
+                <span *ngIf="formRegister.controls.validaTipoEntidad.hasError('min')">
+                    El Tipo de Entidad es requerido
+                </span>
+            </mat-hint>
+        </mat-form-field>
+        </div>
+
+        <div class="row mb-2">
+          <mat-form-field class="col-md-10 mx-auto">
+            <mat-label>Entidad Financiera</mat-label>
+            <mat-select [(ngModel)]="cuenta.entidadFinanciera!.idEntidadFinanciera" formControlName="validaEntidad">
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option *ngFor="let x of tipoEntidad" [value]="x.idEntidadFinanciera">
+                {{ x.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-hint style="color: red" *ngIf="formRegister.controls.validaEntidad.touched">
+              <span *ngIf="formRegister.controls.validaEntidad.hasError('min')">
+                El dato es requerido
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="row mb-2">
+          <mat-form-field class="col-md-10 mx-auto">
+            <mat-label>Tipo Moneda</mat-label>
+            <mat-select [(ngModel)]="cuenta.tipoMoneda!.idDataCatalogo" formControlName="validaMoneda">
+              <mat-option value="-1"> [Seleccione] </mat-option>
+              <mat-option *ngFor="let x of tipoMoneda" [value]="x.idDataCatalogo">
+                {{ x.descripcion }}
+              </mat-option>
+            </mat-select>
+            <mat-hint style="color: red" *ngIf="formRegister.controls.validaMoneda.touched">
+              <span *ngIf="formRegister.controls.validaMoneda.hasError('min')">
+                El dato es requerido
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="row justify-content-between">
+          <button mat-raised-button type="submit" color="primary" [disabled]="formRegister.invalid" (click)="update()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger" type="submit" [mat-dialog-close]="2">
+            Salir
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
