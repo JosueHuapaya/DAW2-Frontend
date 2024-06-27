@@ -1,1 +1,88 @@
-<p>consulta-prestatario works!</p>
+<app-menu></app-menu>
+<div class="container">
+  <div class="row">
+    <mat-toolbar color="primary">
+      <span>Consulta Prestatario</span>
+    </mat-toolbar>
+  </div>
+
+  <div class="row" style="margin-top: 3%; display: flex; justify-content: space-between;">
+    <mat-form-field class="col-md-2">
+      <mat-label>Nombres</mat-label>
+      <input matInput [(ngModel)]="nombres">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-2">
+      <mat-label>Apellidos</mat-label>
+      <input matInput [(ngModel)]="apellidos">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-2">
+      <mat-label>DNI</mat-label>
+      <input matInput [(ngModel)]="dni">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-2">
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="direccion">
+    </mat-form-field>
+
+    <button mat-raised-button type="button" color="primary" style="height: 56px;"
+      (click)="consultaPrestatarioCompleja()">Filtrar</button>
+  </div>
+
+  <div class="row" style="margin-top: 3%">
+    <mat-table #table class="mat-cell" [dataSource]="dataSource">
+
+      <ng-container matColumnDef="idUsuario">
+        <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.idUsuario }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nombres">
+        <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.nombres }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="apellidos">
+        <mat-header-cell *matHeaderCellDef> Apellidos </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.apellidos }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dni">
+        <mat-header-cell *matHeaderCellDef> DNI </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.dni }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="login">
+        <mat-header-cell *matHeaderCellDef> Login </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.login }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="correo">
+        <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.correo }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaNacimiento">
+        <mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.fechaNacimiento }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="direccion">
+        <mat-header-cell *matHeaderCellDef> Dirección </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.direccion }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let aux"> {{ aux.estado == 1 ? 'Activo' : 'Inactivo' }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let aux; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[8, 10, 12]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
