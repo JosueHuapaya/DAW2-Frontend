@@ -116,9 +116,6 @@ export class CrudEjemploAgregarComponent {
         this.ejemplo.usuarioActualiza = this.objUsuario;
         this.ejemplo.usuarioRegistro = this.objUsuario;
         console.log(">>> registra [inicio] " , this.ejemplo);
- 
-
-
         this.ejemploService.registrarCrud(this.ejemplo).subscribe(
           x=>{
                 Swal.fire({ icon: 'info', title: 'Resultado del Registro', text: x.mensaje, });
