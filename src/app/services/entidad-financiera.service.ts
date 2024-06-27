@@ -4,7 +4,8 @@ import { EntidadFinanciera } from '../models/entidad-financiera.model';
 import { AppSettings } from '../app.settings';
 import { Observable } from 'rxjs';
 
-const urlRegistro = AppSettings.API_ENDPOINT+ '/EntidadFinancieraRegistro'
+const urlRegistro = AppSettings.API_ENDPOINT+ '/EntidadFinancieraRegistro';
+const urlCrudEntidadFinanciera = AppSettings.API_ENDPOINT+ '/CrudEntidadFinanciera';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,24 @@ export class EntidadFinancieraService {
     return this.http.get<EntidadFinanciera[]>(urlRegistro+"/listar?idDataCatalogo=" + idDataCatalogo);
   }
 
+  //Validaciones
+  validacionNombreActualiza(nombre:String,id:number):Observable<any>{
+    console.log('>> Service >> validacionNombre[inicio]'+nombre)
+    return this.http.get<any>(urlCrudEntidadFinanciera+'/validarNombreActualizar?nombre='+nombre+ "&idEntidadFinanciera="+id);
+  }
+
+  //crud entidad financiera
+  registrarCrudEntidad(bean:EntidadFinanciera):Observable<any>{
+    return this.http.post(urlCrudEntidadFinanciera+"/registrarEntidadFinanciera", bean);
+  }
+  actualizaCrudEntidad(bean:EntidadFinanciera):Observable<any>{
+    return this.http.put(urlCrudEntidadFinanciera+"/updateEntidadFinanciera", bean);
+  }
+  eliminarCrudEntidad(id:number):Observable<any>{
+    return this.http.delete(urlCrudEntidadFinanciera+"/deleteEntidadFinanciera/"+id);
+  }
+  consultarCrudEntidad(filter:string):Observable<any>{
+    return this.http.get(urlCrudEntidadFinanciera+"/listEntidadFinancieraLike/"+filter);
+  }
 }
 
