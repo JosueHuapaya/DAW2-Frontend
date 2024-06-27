@@ -1,0 +1,35 @@
+.mat-column-idUsuario {
+    flex: 0 0 7%;
+}
+
+.mat-column-nombres {
+    flex: 0 0 10%;
+}
+
+.mat-column-apellidos {
+    flex: 0 0 8%;
+}
+
+.mat-column-dni {
+    flex: 0 0 8%;
+}
+
+.mat-column-login {
+    flex: 0 0 9%;
+}
+
+.mat-column-correo {
+    flex: 0 0 13%;
+}
+
+.mat-column-fechaNacimiento {
+    flex: 0 0 15%;
+}
+
+.mat-column-direccion {
+    flex: 0 0 11%;
+}
+
+.mat-column-estado {
+    flex: 0 0 8%;
+}

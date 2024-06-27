@@ -6,6 +6,7 @@ import { AppSettings } from '../app.settings';
 
 const baseUrlPrueba = AppSettings.API_ENDPOINT+ '/prestatario';
 const baseUrlCrud = AppSettings.API_ENDPOINT + '/crudPrestatario'; //T2
+const baseUrlConsulta = AppSettings.API_ENDPOINT + '/consultaPrestatario'
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,11 @@ export class PrestatarioService {
   consultarPrestatarioCrud(filtro: string, id: number): Observable<any> {
     return this.http.get(baseUrlCrud + "/listaPrestatarioPorLogin/" + filtro + "/" + id);
   }
+  //EF
+  consultaPrestatarioCompleja(nombres: string, apellidos: string, dni: string, direccion: string): Observable<any> {
 
+    const consulta = `${baseUrlConsulta}/consultaPrestatarioCompleja?nombres=${nombres}&apellidos=${apellidos}&dni=${dni}&direccion=${direccion}`;
+    return this.http.get<any>(consulta);
+
+  }
 }
