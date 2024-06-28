@@ -6,7 +6,7 @@ import { DataCatalogo } from '../models/dataCatalogo.model';
 
 const baseUrl = AppSettings.API_ENDPOINT + '/datacatalogo';
 const baseCrudUrl = AppSettings.API_ENDPOINT + '/crudDataCatalogo';
-
+const baseUrlConsultaDataCatalogo = AppSettings.API_ENDPOINT + '/consultaDataCatalogo';
 @Injectable({
   providedIn: 'root'
 })
@@ -46,5 +46,10 @@ export class DataCatalogoService {
   }
   consultarCrud(filtro:string):Observable<any>{
     return this.http.get(baseCrudUrl+"/listaDataCatalogoPorNombreLike/"+ filtro);
+  }
+  //consulta
+  consultaDataCatlogo(descripcion: string,  estado: number,idCatalogo:number): Observable<any>{
+    console.log('>>> Service >> consultaDataCatalogo [inicio]' + descripcion);
+    return this.http.get<any>(baseUrlConsultaDataCatalogo+'/listaConsultaComplejaDataCatalogo?descripcion='+descripcion + "&estado="+estado +"&idCatalogo="+idCatalogo);
   }
 }
