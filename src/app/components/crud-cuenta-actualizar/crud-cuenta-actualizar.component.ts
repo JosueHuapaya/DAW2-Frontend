@@ -91,11 +91,6 @@ export class CrudCuentaActualizarComponent {
   }
 
 
-
-
-
-
-
   formRegister = this._formBuilder.group({
     validateNumber: ['', [Validators.required, Validators.pattern('[0-9]{20}')], this.validateNumber.bind(this), this.validateNumberRegister.bind(this)],
     validaTipoEntidad: ['', [Validators.min(1)]],
@@ -122,21 +117,15 @@ export class CrudCuentaActualizarComponent {
   listarEntidadFinanciera(){
     if(this.cuenta.entidadFinanciera?.tipoEntidad?.idDataCatalogo === this.catalogo){
       this._cuentaService.listar(this.cuenta.entidadFinanciera!.tipoEntidad!.idDataCatalogo).subscribe(
-        (x) =>{
+        x => {
           this.tipoEntidad = x
-          x.forEach(entidad => {
-            console.log(">>> Entidades Financieras >>>" + entidad.nombre)
-          })
         }
       )
     }else{
       this.cuenta.entidadFinanciera!.idEntidadFinanciera = -1;
       this._cuentaService.listar(this.cuenta.entidadFinanciera!.tipoEntidad!.idDataCatalogo).subscribe(
-        (x) =>{
+        x => {
           this.tipoEntidad = x
-          x.forEach(entidad => {
-            console.log(">>> Entidades Financieras >>>" + entidad.nombre)
-          })
         }
       )
     }
