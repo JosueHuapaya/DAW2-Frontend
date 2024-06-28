@@ -38,7 +38,7 @@ export class CoordenadaService {
 
   consultarCoordenadaCompleta(latitud: number, longitud: number, departamento: string): Observable<any> {
 
-    return this.http.get(baseUrlCoordenadaConsulta + '/consultaComplejaCoordenada/' + latitud + '/' + longitud + '/' + departamento);
+    return this.http.get(baseUrlCoordenadaConsulta + '/consultaComplejaCoordenada?latitud=' + latitud + '&longitud=' + longitud + '&departamento=' + departamento);
 
   }
 
