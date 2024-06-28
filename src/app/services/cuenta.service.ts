@@ -8,7 +8,8 @@ import { EntidadFinanciera } from '../models/entidad-financiera.model';
 // const urlRegistro = AppSettings.API_ENDPOINT+ '/cuenta'
 
 const baseUrlPrueba = AppSettings.API_ENDPOINT+ '/cuenta';
-const urlCrud = AppSettings.API_ENDPOINT + '/crud/cuenta';
+const urlCrud = AppSettings.API_ENDPOINT + '/crud/cuenta'
+const urlConsulta = AppSettings.API_ENDPOINT + '/consulta/cuenta';
 
 
 
@@ -55,4 +56,9 @@ export class CuentaService {
     return this.http.get(urlCrud + "/list/" + filter);
   }
 
+  // EF
+  consultaCompleja(numero: string, entidad: number, moneda: number, tipoentidad: number, estado: number) {
+    // http://localhost:8090/url/consulta/cuenta/lista/12345678912345678930/2/5/0
+    return this.http.get(urlConsulta + '/lista?numero='+ numero + '&entidad=' + entidad + '&moneda=' + moneda + '&tipoentidad=' + tipoentidad + '&estado=' + estado);
+  }
 }

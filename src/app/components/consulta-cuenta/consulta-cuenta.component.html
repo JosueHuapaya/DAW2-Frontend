@@ -1,1 +1,101 @@
-<p>consulta-cuenta works!</p>
+<app-menu></app-menu>
+<div class="container bg-white shadow-lg pb-3 rounded">
+  <div class="row mb-3">
+    <mat-toolbar color="primary" class="rounded">
+      <span >Consulta Cuenta</span>
+    </mat-toolbar>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-3 mx-auto">
+      <mat-label>Numero de Cuenta</mat-label>
+      <input matInput [(ngModel)]="numero">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+      <mat-form-field class="col-3 mx-auto">
+        <mat-label>Tipo Entidad</mat-label>
+        <mat-select [(ngModel)]="idTipoEntidad"(selectionChange)="listarEntidadFinanciera()" >
+          <mat-option value="-1"> [Seleccione] </mat-option>
+         <mat-option *ngFor="let x of tipoEntidadBancaria" [value]="x.idDataCatalogo">
+          {{x.descripcion}}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="row">
+      <mat-form-field class="col-3 mx-auto">
+        <mat-label>Entidad Financiera</mat-label>
+        <mat-select [(ngModel)]="entidad">
+          <mat-option value="-1"> [Seleccione] </mat-option>
+          <mat-option *ngFor="let x of tipoEntidad" [value]="x.idEntidadFinanciera">
+            {{x.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="row">
+      <mat-form-field class="col-3 mx-auto">
+        <mat-label>Moneda</mat-label>
+        <mat-select [(ngModel)]="moneda">
+          <mat-option value="-1"> [Seleccione] </mat-option>
+          <mat-option *ngFor="let x of tipoMoneda" [value]="x.idDataCatalogo">
+            {{x.descripcion}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="row">
+    <div class="mx-auto my-1">
+        <div class="custom-control custom-switch">
+            <input [(ngModel)]="estado" type="checkbox" class="custom-control-input" id="idEstado" name="estado"  [checked]="true"/>
+            <label class="custom-control-label" for="idEstado">Estado</label>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="mx-auto my-3">
+      <button (click)="consultar()" mat-raised-button type="button" color="primary">
+        Filtrar
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-table #table class="mat-cell" [dataSource]="data">
+      <ng-container matColumnDef="idCuenta">
+        <mat-header-cell *matHeaderCellDef><strong>Codigo</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.idCuenta}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="numero">
+        <mat-header-cell *matHeaderCellDef><strong>Numero</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.numero}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="entidad">
+        <mat-header-cell *matHeaderCellDef><strong>Entidad</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.entidadFinanciera.nombre}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="moneda">
+        <mat-header-cell *matHeaderCellDef><strong>Moneda</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.tipoMoneda.descripcion}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef><strong>Estado</strong></mat-header-cell>
+        <mat-cell *matCellDef="let res"> {{res.estado == 1 ? 'Activo' : 'Inactivo'}} </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row *matRowDef="let res; columns: columns"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>
