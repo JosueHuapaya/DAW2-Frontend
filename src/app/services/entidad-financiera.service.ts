@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EntidadFinanciera } from '../models/entidad-financiera.model';
 import { AppSettings } from '../app.settings';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 const urlRegistro = AppSettings.API_ENDPOINT+ '/EntidadFinancieraRegistro';
 const urlCrudEntidadFinanciera = AppSettings.API_ENDPOINT+ '/CrudEntidadFinanciera';
+const urlEntidadFinancierConsulta = AppSettings.API_ENDPOINT+ '/consultaEntidadFinanciera';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,14 @@ export class EntidadFinancieraService {
   }
   consultarCrudEntidad(filter:string):Observable<any>{
     return this.http.get(urlCrudEntidadFinanciera+"/listEntidadFinancieraLike/"+filter);
+  }
+  EntidadFinancieraConsulta(nombre:string, gerente:string, tipo:number, estado:number):Observable<any>{
+    const params = new HttpParams()
+        .set("nombre", nombre)
+        .set("gerente", gerente)
+        .set("idTipo", tipo)
+        .set("estado", estado);
+    return this.http.get(urlEntidadFinancierConsulta+"/consultaEntidadCompleja",{params})
   }
 }
 
