@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AppSettings } from '../app.settings';
 
 const baseUrl = AppSettings.API_ENDPOINT+ '/solicitud';
+const baseUrlCrud = AppSettings.API_ENDPOINT + '/crudSolicitud';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,18 @@ export class SolicitudPrestamoService {
 
   listaPrestatariosTotales(): Observable<any> {
     return this.http.get(baseUrl + '/prestatarios', {});
+  }
+
+  consultarCrud(filtro:string):Observable<any>{
+    return this.http.get(baseUrlCrud+"/listaSolicitudPorCapLike/"+ filtro);
+  }
+
+  actualizarCrud(data:SolicitudPrestamo):Observable<any>{
+    console.log(data)
+    return this.http.put(baseUrlCrud+"/actualizaSolicitud", data);
+  }
+
+  eliminarCrud(id:number):Observable<any>{
+    return this.http.delete(baseUrlCrud+"/eliminaSolicitud/"+id);
   }
 }

@@ -1,1 +1,109 @@
-<p>crud-solicitud-prestamo-agregar works!</p>
+<div class="container">
+    <form [formGroup]="formRegistrarSolicitudPrestamo">
+        <div class="mat-dialog-content">
+
+            <div class="row">
+                <mat-toolbar color="primary">
+                    <span>Registra Solicitud Préstamo</span>
+                </mat-toolbar>
+            </div>
+
+            <div  class="row"  style="margin-top: 3%">
+                <mat-form-field class="col-md-4">
+                    <mat-label>Capital</mat-label>
+                    <input  matInput [(ngModel)] ="solicitudPrestamo.capital" formControlName="validaCapital">
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaCapital.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaCapital.hasError('required')">
+                            El capital es requerido
+                        </span>
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaCapital.hasError('pattern')">
+                            El capital debe ser un número que puede tener decimales (Min. 2, Max. 6 dígitos)
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Días</mat-label>
+                    <mat-select [(ngModel)]="solicitudPrestamo.dias!.idDataCatalogo" formControlName="validaDias">
+                        <mat-option value="-1"> [Seleccione] </mat-option>
+                        <mat-option *ngFor="let d of lstDias" [value]="d.idDataCatalogo">
+                            {{d.descripcion}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaDias.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaDias.hasError('min')">
+                            El día es requerido
+                        </span>
+                    </mat-hint>
+                </mat-form-field>          
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Monto Pagar</mat-label>
+                    <input  matInput [(ngModel)] ="solicitudPrestamo.montoPagar" formControlName="validaMontoPagar">
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaMontoPagar.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaMontoPagar.hasError('required')">
+                            El monto a pagar es requerido
+                        </span>
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaMontoPagar.hasError('pattern')">
+                            El monto a pagar debe ser un número que puede tener decimales (Min. 2, Max. 6 dígitos)
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div  class="row"  style="margin-top: 3%">
+              
+                <mat-form-field class="col-md-4">
+                    <mat-label>Fecha inicio</mat-label>
+                    <input  matInput [(ngModel)] ="solicitudPrestamo.fechaInicioPrestamo" formControlName="validaFechaInicioPrestamo" type="date">
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaInicioPrestamo.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaInicioPrestamo.hasError('required')">
+                            La fecha de inicio es requerida
+                        </span>
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaInicioPrestamo.hasError('pattern')">
+                            La fecha de inicio debe ser válida
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input  matInput [(ngModel)] ="solicitudPrestamo.fechaFinPrestamo" formControlName="validaFechaFinPrestamo" type="date">
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaFinPrestamo.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaFinPrestamo.hasError('required')">
+                            La fecha de fin es requerida
+                        </span>
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaFechaFinPrestamo.hasError('pattern')">
+                            La fecha de fin debe ser válida
+                        </span>
+                        <span *ngIf="!fechaFinMayorQueFechaInicio()">
+                            La fecha de fin debe ser mayor a la fecha de inicio
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Prestatario</mat-label>
+                    <mat-select [(ngModel)]="solicitudPrestamo.usuarioPrestatario!.idUsuario" formControlName="validaPrestatario">
+                        <mat-option value="-1"> [Seleccione] </mat-option>
+                        <mat-option *ngFor="let p of lstPrestatarios" [value]="p.idUsuario">
+                            {{p.nombreCompleto}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint style="color: red;" *ngIf="formRegistrarSolicitudPrestamo.controls.validaPrestatario.touched">
+                        <span *ngIf="formRegistrarSolicitudPrestamo.controls.validaPrestatario.hasError('min')">
+                            El prestatario es requerido
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+           
+            </div>
+
+            <div  class="row"  style="margin-top: 3%; margin-left: auto; margin-right: auto; max-width: fit-content;" >
+                <button mat-raised-button type="submit" style="margin: 20px;" color="primary" [disabled]="formRegistrarSolicitudPrestamo.invalid" (click)="registra()">Registra</button>
+                <button mat-button type="submit" style="background-color: #dd3333; margin: 20px; width: 100px;" [mat-dialog-close]="2">Salir</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
